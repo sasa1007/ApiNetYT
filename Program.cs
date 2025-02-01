@@ -1,4 +1,5 @@
 using Api.Data;
+using Api.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,8 @@ builder.Services.AddDbContext<AplicationDbContext>(options =>
 
 // builder.Services.AddDbContext<AplicationDbContext>(opt =>
 //     opt.UseInMemoryDatabase("TodoList"));
+
+builder.Services.AddScoped<IStockrepository, StockRepository>();
 
 
 var app = builder.Build();
