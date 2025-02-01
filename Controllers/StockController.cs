@@ -12,9 +12,9 @@ namespace Api.Controllers;
 [Route("/api/stock")]
 public class StockController : ControllerBase
 {
-    private readonly IStockrepository _stockRepository;
+    private readonly IStockRepository _stockRepository;
 
-    public StockController(IStockrepository stockRepository)
+    public StockController(IStockRepository stockRepository)
     {
         _stockRepository = stockRepository;
     }
@@ -24,9 +24,9 @@ public class StockController : ControllerBase
     {
         var stocks = await _stockRepository.GetAllSync();
 
-        var StockDtop = stocks.Select(s => s.ToStockDto());
+        var stockDtop = stocks.Select(s => s.ToStockDto());
 
-        return Ok(stocks);
+        return Ok(stockDtop);
     }
 
     [HttpGet("{id}")]

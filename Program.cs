@@ -18,7 +18,8 @@ builder.Services.AddDbContext<AplicationDbContext>(options =>
 // builder.Services.AddDbContext<AplicationDbContext>(opt =>
 //     opt.UseInMemoryDatabase("TodoList"));
 
-builder.Services.AddScoped<IStockrepository, StockRepository>();
+builder.Services.AddScoped<IStockRepository, StockRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 
 
 var app = builder.Build();

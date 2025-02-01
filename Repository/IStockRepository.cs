@@ -3,7 +3,7 @@ using Api.Models;
 
 namespace Api.Repository;
 
-public interface IStockrepository
+public interface IStockRepository
 {
     Task<List<Stock>> GetAllSync();
 

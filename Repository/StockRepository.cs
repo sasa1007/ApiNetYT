@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Api.Repository;
 
-public class StockRepository : IStockrepository
+public class StockRepository : IStockRepository
 {
     private readonly AplicationDbContext _context;
 
