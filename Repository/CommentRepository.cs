@@ -20,14 +20,16 @@ public class CommentRepository : ICommentRepository
         return await _context.Comments.ToListAsync();
     }
 
-    public Task<Comment?> GetByIdAsync(int id)
+    public async Task<Comment?> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _context.Comments.FirstOrDefaultAsync(c => c.Id == id);
     }
 
-    public Task<Comment> CreateAsync(Comment comment)
+    public async Task<Comment> CreateAsync(Comment comment)
     {
-        throw new NotImplementedException();
+        await _context.Comments.AddAsync(comment);
+        await _context.SaveChangesAsync();
+        return comment;
     }
 
     public Task<Comment?> UpdateAsync(int id, UpdateStockRequestDto updateStockRequestDto)

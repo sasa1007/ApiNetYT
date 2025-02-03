@@ -6,30 +6,31 @@ namespace Api.Mappers;
 public static class StockMappers
 {
 
-    public static StockDto ToStockDto(this Stock stockModel)
+    public static StockDto ToStockDto(this Stock stock)
     {
         return new StockDto
         {
-            Id = stockModel.Id,
-            Symbol = stockModel.Symbol,
-            CompanyName = stockModel.CompanyName,
-            Purchace = stockModel.Purchace,
-            Lastdiv = stockModel.Lastdiv,
-            Marketcap = stockModel.Marketcap,
-            Industry = stockModel.Industry,
+            Id = stock.Id,
+            Symbol = stock.Symbol,
+            CompanyName = stock.CompanyName,
+            Purchace = stock.Purchace,
+            Lastdiv = stock.Lastdiv,
+            Marketcap = stock.Marketcap,
+            Industry = stock.Industry,
+            Comments = stock.Comments.Select(c=>c.ToCommentDto()).ToList(),
         };
     }
 
-    public static Stock ToStockFromCreatedDto(this CreateStockRequestDto stockDto)
+    public static Stock ToStockFromCreatedDto(this CreateStockRequestDto createStockRequestDto)
     {
         return new Stock
         {
-            Symbol = stockDto.Symbol,
-            CompanyName = stockDto.CompanyName,
-            Purchace = stockDto.Purchace,
-            Lastdiv = stockDto.Lastdiv,
-            Marketcap = stockDto.Marketcap,
-            Industry = stockDto.Industry,
+            Symbol = createStockRequestDto.Symbol,
+            CompanyName = createStockRequestDto.CompanyName,
+            Purchace = createStockRequestDto.Purchace,
+            Lastdiv = createStockRequestDto.Lastdiv,
+            Marketcap = createStockRequestDto.Marketcap,
+            Industry = createStockRequestDto.Industry,
         };
     }
 
