@@ -1,6 +1,7 @@
 using Api.Data;
 using Api.Dtos.Stock;
 using Api.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace Api.Repository;
@@ -32,13 +33,32 @@ public class CommentRepository : ICommentRepository
         return comment;
     }
 
-    public Task<Comment?> UpdateAsync(int id, UpdateStockRequestDto updateStockRequestDto)
+    public async Task<Comment?> UpdateAsync(int id, Comment comment)
     {
-        throw new NotImplementedException();
+        var commentFromDB = await _context.Comments.FirstOrDefaultAsync(c => c.Id == id);
+
+        if (commentFromDB == null)
+        {
+            return null;
+        }
+
+        commentFromDB.Title = comment.Title;
+        commentFromDB.Content = comment.Content;
+
+        await _context.SaveChangesAsync();
+        return commentFromDB;
     }
 
-    public Task<Comment?> DeleteAsync(int id)
+    public async Task<Comment?> DeleteAsync(int id)
     {
-        throw new NotImplementedException();
+        var  commentFromDB = await _context.Comments.FirstOrDefaultAsync(c => c.Id == id);
+
+        if (commentFromDB == null)
+        {
+            return null;
+        }
+        _context.Comments.Remove(commentFromDB);
+        await _context.SaveChangesAsync();
+        return commentFromDB;
     }
 }

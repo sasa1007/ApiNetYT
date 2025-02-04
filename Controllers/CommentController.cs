@@ -59,30 +59,30 @@ public class CommentCotrnoller : ControllerBase
         return CreatedAtAction(nameof(GetById), new {id = commentModel.Id}, commentModel.ToCommentDto());
 
     }
-    //
-    // [HttpPut("{id}")]
-    // public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateStockRequestDto updateStockDto)
-    // {
-    //     var stockModel = await _commentRepository.UpdateAsync(id, updateStockDto);
-    //
-    //     if (stockModel == null)
-    //     {
-    //         return NotFound();
-    //     }
-    //
-    //     return Ok(stockModel.ToStockDto());
-    // }
-    //
-    // [HttpDelete("{id}")]
-    // public async Task<IActionResult> Delete([FromRoute] int id)
-    // {
-    //     var stockModel = await _commentRepository.DeleteAsync(id);
-    //
-    //     if (stockModel == null)
-    //     {
-    //         return NotFound();
-    //     }
-    //
-    //     return NoContent();
-    // }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateCommentRequestDto  updateCommentRequestDto)
+    {
+        var comment = await _commentRepository.UpdateAsync(id, updateCommentRequestDto.ToCommentFromUpdate());
+
+        if (comment == null)
+        {
+            return NotFound("Comment not found");
+        }
+
+        return Ok(comment.ToCommentDto());
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete([FromRoute] int id)
+    {
+        var commentFromDb = await _commentRepository.DeleteAsync(id);
+
+        if (commentFromDb == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(commentFromDb);
+    }
 }
