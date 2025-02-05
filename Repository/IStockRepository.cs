@@ -1,11 +1,12 @@
 using Api.Dtos.Stock;
+using Api.Helpers;
 using Api.Models;
 
 namespace Api.Repository;
 
 public interface IStockRepository
 {
-    Task<List<Stock>> GetAllSync();
+    Task<List<Stock>> GetAllSync(QuerryObject querryObject);
 
     Task<Stock?> GetByIdAsync(int id);
 
